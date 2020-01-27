@@ -1,84 +1,35 @@
 use crate::MAIN;
 use anyhow::Result;
 use rocket::request::Request;
-use rocket::response::{self, content, NamedFile, Responder};
+use rocket::response::{self, content::Html, Responder};
 use std::ffi::OsStr;
 use std::fmt::Debug;
-use std::fs::{metadata, read_to_string};
-use std::os::unix::fs::PermissionsExt;
+use std::fs::read_to_string;
 use std::path::Path;
-use std::process::Command;
+use comrak::{markdown_to_html, ComrakOptions};
 
-pub enum File {
-	Html(content::Html<String>),
-	File(NamedFile),
-}
+pub struct MarkDown(Html<String>);
 
-impl File {
-	fn html(s: String) -> Result<Self> {
-		Ok(Self::Html(content::Html(s)))
-	}
-
-	fn file(p: impl AsRef<Path>) -> Result<Self> {
-		Ok(Self::File(NamedFile::open(p)?))
-	}
-
-	pub fn open<P>(path: P) -> Result<File>
+impl MarkDown {
+	pub fn open<P>(path: P) -> Result<Self>
 	where
 		P: AsRef<OsStr> + AsRef<Path> + Debug,
 	{
-		let p = Path::new(&path);
+		Ok(Self(Html(Self::md(&read_to_string(path)?)?)))
+	}
 
-		// TODO executable checking
-		if is_exec(&p) {
-			return Self::html(source(&p)?);
-		}
+	pub fn md(body: &str) -> Result<String> {
+		let skeleton: String = MAIN.to_owned();
 
-		// extensions
-		match p.extension() {
-			Some(s) => match s
-				.to_str()
-				.ok_or(anyhow!("cannot convert filename to utf-8"))?
-			{
-				"md" => Self::html(md(&read_to_string(path)?)?),
-				_ => Self::file(path),
-			},
-			None => Err(anyhow!("path {:?} has no extension", path)),
-		}
+		let markdown = markdown_to_html(body, &ComrakOptions::default());
+
+		Ok(skeleton.replace("{}", &markdown))
 	}
 }
 
-impl<'r> Responder<'r> for File {
+impl<'r> Responder<'r> for MarkDown {
 	fn respond_to(self, r: &Request) -> response::Result<'r> {
-		match self {
-			Self::Html(c) => c.respond_to(r),
-			Self::File(c) => c.respond_to(r),
-		}
+		self.0.respond_to(r)
 	}
 }
 
-#[macro_export]
-macro_rules! markdown {
-	($e:expr) => {{
-		use comrak::{markdown_to_html, ComrakOptions};
-		markdown_to_html($e, &ComrakOptions::default())
-		}};
-}
-
-pub fn md(body: &str) -> Result<String> {
-	let skeleton: String = MAIN.to_owned();
-
-	Ok(skeleton.replace("{}", &markdown!(body)))
-}
-
-fn is_exec(path: impl AsRef<Path>) -> bool {
-	match metadata(path) {
-		Ok(s) => s.permissions().mode() & 0o111 != 0,
-		Err(_) => false,
-	}
-}
-
-fn source(path: &Path) -> Result<String> {
-	let r = Command::new(path).output()?.stdout;
-	Ok(String::from_utf8(r)?)
-}

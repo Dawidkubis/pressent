@@ -1,4 +1,5 @@
 use structopt::StructOpt;
+use anyhow::Result;
 
 /// Command line arguments representation
 #[derive(StructOpt)]
@@ -9,3 +10,4 @@ pub struct Cli {
 	/// file
 	pub file: String,
 }
+

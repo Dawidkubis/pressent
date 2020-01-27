@@ -1,19 +1,22 @@
-use crate::response::File;
+use crate::response::MarkDown;
 use crate::OPT;
 use rocket::Request;
+use rocket::response::NamedFile;
 use std::path::PathBuf;
 
 /// Index
 #[get("/")]
-pub fn index() -> File {
-	File::open(&OPT.file).unwrap()
+pub fn index() -> MarkDown {
+	MarkDown::open(&OPT.file).unwrap()
 }
 
+/// any path
 #[get("/<path..>")]
-pub fn path(path: PathBuf) -> Option<File> {
-	File::open(path).ok()
+pub fn path(path: PathBuf) -> Option<NamedFile> {
+	NamedFile::open(path).ok()
 }
 
+/// 404 catcher
 #[catch(404)]
 pub fn not_found(req: &Request) -> String {
 	format!("404: {} is not a valid path", req.uri())
