@@ -1,10 +1,11 @@
 use rocket::Request;
 use crate::response::File;
+use crate::OPT;
 
 /// Index
 #[get("/")]
 pub fn index() -> File {
-	File::open("index.html").unwrap()
+	File::open(&OPT.file).unwrap()
 }
 
 #[catch(404)]

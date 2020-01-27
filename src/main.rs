@@ -4,6 +4,8 @@
 extern crate rocket;
 #[macro_use]
 extern crate anyhow;
+#[macro_use]
+extern crate lazy_static;
 extern crate comrak;
 extern crate serde;
 extern crate structopt;
@@ -17,12 +19,14 @@ use cli::Cli;
 use std::env;
 use structopt::StructOpt;
 
+lazy_static! {
+	pub static ref OPT: Cli = Cli::from_args();
+}
+
 fn main() {
-	// get cmd args
-	let opt = Cli::from_args();
 
 	// port setting
-	if let Some(i) = opt.port {
+	if let Some(i) = OPT.port {
 		env::set_var("ROCKET_PORT", format!("{}", i));
 	}
 
