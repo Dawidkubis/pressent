@@ -1,7 +1,7 @@
 use crate::response::MarkDown;
 use crate::OPT;
-use rocket::Request;
 use rocket::response::NamedFile;
+use rocket::Request;
 use std::path::PathBuf;
 
 /// Index

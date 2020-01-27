@@ -1,12 +1,12 @@
 use crate::MAIN;
 use anyhow::Result;
+use comrak::{markdown_to_html, ComrakOptions};
 use rocket::request::Request;
 use rocket::response::{self, content::Html, Responder};
 use std::ffi::OsStr;
 use std::fmt::Debug;
 use std::fs::read_to_string;
 use std::path::Path;
-use comrak::{markdown_to_html, ComrakOptions};
 
 pub struct MarkDown(Html<String>);
 
@@ -32,4 +32,3 @@ impl<'r> Responder<'r> for MarkDown {
 		self.0.respond_to(r)
 	}
 }
-
