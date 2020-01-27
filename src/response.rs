@@ -1,3 +1,4 @@
+use crate::MAIN;
 use anyhow::Result;
 use rocket::request::Request;
 use rocket::response::{self, content, NamedFile, Responder};
@@ -7,7 +8,6 @@ use std::fs::{metadata, read_to_string};
 use std::os::unix::fs::PermissionsExt;
 use std::path::Path;
 use std::process::Command;
-use crate::MAIN;
 
 pub enum File {
 	Html(content::Html<String>),

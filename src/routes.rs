@@ -1,6 +1,6 @@
-use rocket::Request;
 use crate::response::File;
 use crate::OPT;
+use rocket::Request;
 use std::path::PathBuf;
 
 /// Index
