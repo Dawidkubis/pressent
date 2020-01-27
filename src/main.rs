@@ -4,8 +4,6 @@
 extern crate rocket;
 #[macro_use]
 extern crate anyhow;
-#[macro_use]
-extern crate lazy_static;
 extern crate comrak;
 extern crate serde;
 extern crate structopt;
@@ -13,9 +11,10 @@ extern crate toml;
 
 mod cli;
 mod routes;
+mod response;
 
 use cli::Cli;
-use std::{env, thread, time};
+use std::env;
 use structopt::StructOpt;
 
 fn main() {

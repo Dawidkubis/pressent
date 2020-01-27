@@ -1,4 +1,3 @@
-use crate::{SETTINGS, WWW};
 use anyhow::Result;
 use rocket::request::Request;
 use rocket::response::{self, content, NamedFile, Responder};
@@ -6,7 +5,7 @@ use std::ffi::OsStr;
 use std::fmt::Debug;
 use std::fs::{metadata, read_to_string};
 use std::os::unix::fs::PermissionsExt;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 use std::process::Command;
 
 pub enum File {
@@ -66,7 +65,7 @@ macro_rules! markdown {
 }
 
 pub fn md(body: &str) -> Result<String> {
-	let skeleton: String = read_to_string([WWW, &SETTINGS.skeleton].iter().collect::<PathBuf>())?;
+	let skeleton: String = "<!DOCTYPE html><html><head></head><body>{}</body></html>".to_owned();
 
 	Ok(skeleton.replace("{}", &markdown!(body)))
 }

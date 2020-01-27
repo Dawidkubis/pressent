@@ -1,12 +1,10 @@
-use anyhow::Result;
-use rocket::response::NamedFile;
 use rocket::Request;
-use std::path::{Path, PathBuf};
+use crate::response::File;
 
 /// Index
 #[get("/")]
-pub fn index() -> NamedFile {
-	NamedFile::open("index.html").unwrap()
+pub fn index() -> File {
+	File::open("index.html").unwrap()
 }
 
 #[catch(404)]
