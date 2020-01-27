@@ -27,7 +27,7 @@ impl MarkDown {
 			.map(|x| format!("<div class=\"slide\">{}</div>", x))
 			.collect();
 
-		Ok(skeleton.replace("{}", &dbg!(markdown)))
+		Ok(skeleton.replace("{}", &markdown))
 	}
 }
 
