@@ -7,9 +7,7 @@ extern crate anyhow;
 #[macro_use]
 extern crate lazy_static;
 extern crate comrak;
-extern crate serde;
 extern crate structopt;
-extern crate toml;
 
 mod cli;
 mod routes;
