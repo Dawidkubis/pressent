@@ -23,7 +23,11 @@ impl MarkDown {
 
 		let markdown = markdown_to_html(body, &ComrakOptions::default());
 
-		Ok(skeleton.replace("{}", &markdown))
+		let markdown: String = markdown.split("<hr />")
+			.map(|x| format!("<div class=\"slide\">{}</div>", x))
+			.collect();
+
+		Ok(skeleton.replace("{}", &dbg!(markdown)))
 	}
 }
 

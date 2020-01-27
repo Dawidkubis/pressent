@@ -16,6 +16,7 @@ mod routes;
 use cli::Cli;
 use std::env;
 use structopt::StructOpt;
+//use anyhow::Result;
 
 lazy_static! {
 	pub static ref OPT: Cli = Cli::from_args();
@@ -24,6 +25,8 @@ lazy_static! {
 pub static MAIN: &'static str = include_str!("index.html");
 
 fn main() {
+	
+
 	// port setting
 	if let Some(i) = OPT.port {
 		env::set_var("ROCKET_PORT", format!("{}", i));
