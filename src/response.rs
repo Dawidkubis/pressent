@@ -7,6 +7,7 @@ use std::fs::{metadata, read_to_string};
 use std::os::unix::fs::PermissionsExt;
 use std::path::Path;
 use std::process::Command;
+use crate::MAIN;
 
 pub enum File {
 	Html(content::Html<String>),
@@ -65,7 +66,7 @@ macro_rules! markdown {
 }
 
 pub fn md(body: &str) -> Result<String> {
-	let skeleton: String = "<!DOCTYPE html><html><head></head><body>{}</body></html>".to_owned();
+	let skeleton: String = MAIN.to_owned();
 
 	Ok(skeleton.replace("{}", &markdown!(body)))
 }

@@ -15,6 +15,7 @@ mod cli;
 mod routes;
 mod response;
 
+
 use cli::Cli;
 use std::env;
 use structopt::StructOpt;
@@ -22,6 +23,8 @@ use structopt::StructOpt;
 lazy_static! {
 	pub static ref OPT: Cli = Cli::from_args();
 }
+
+pub static MAIN: &'static str = include_str!("index.html");
 
 fn main() {
 
