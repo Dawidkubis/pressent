@@ -25,8 +25,6 @@ lazy_static! {
 pub static MAIN: &'static str = include_str!("index.html");
 
 fn main() {
-	
-
 	// port setting
 	if let Some(i) = OPT.port {
 		env::set_var("ROCKET_PORT", format!("{}", i));
