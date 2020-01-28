@@ -22,7 +22,7 @@ lazy_static! {
 	pub static ref OPT: Cli = Cli::from_args();
 }
 
-pub static MAIN: &'static str = include_str!("index.html");
+pub static MAIN: &'static str = include_str!("main.css");
 
 fn main() {
 	// port setting

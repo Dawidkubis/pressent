@@ -19,16 +19,16 @@ impl MarkDown {
 	}
 
 	pub fn md(body: &str) -> Result<String> {
-		let skeleton: String = MAIN.to_owned();
+		let css: String = MAIN.to_owned();
 
 		let markdown = markdown_to_html(body, &ComrakOptions::default());
 
-		let markdown: String = markdown
-			.split("<hr />")
-			.map(|x| format!("<div class=\"slide\">{}</div>", x))
-			.collect();
-
-		Ok(skeleton.replace("{}", &markdown))
+		Ok(format!(
+				"
+				<!DOCTYPE html>
+				<html><head><style>{}</style></head><body>{}</body</html>
+				", css, &markdown
+		))
 	}
 }
 
