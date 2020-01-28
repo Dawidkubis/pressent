@@ -1,26 +1,21 @@
 use crate::MAIN;
-use anyhow::Result;
 use comrak::{markdown_to_html, ComrakOptions};
 use rocket::request::Request;
 use rocket::response::{self, content::Html, Responder};
-use std::ffi::OsStr;
-use std::fmt::Debug;
-use std::fs::read_to_string;
-use std::path::Path;
 
 pub struct MarkDown(String);
 
 impl MarkDown {
-	pub fn new(s: &str) -> Result<Self> {
-		Ok(Self(Self::md(s)?))
+	pub fn new(s: &str) -> Self {
+		Self(Self::md(s))
 	}
 
-	pub fn md(s: &str) -> Result<String> {
+	fn md(s: &str) -> String {
 		let css: String = MAIN.to_owned();
 
 		let markdown = markdown_to_html(s, &ComrakOptions::default());
 
-		Ok(format!(
+		format!(
 				"
 <!DOCTYPE html>
 <html>
@@ -37,7 +32,7 @@ impl MarkDown {
 	</body>
 </html>
 				", css, &markdown
-		))
+		)
 	}
 }
 
