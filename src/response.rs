@@ -8,14 +8,14 @@ use std::fmt::Debug;
 use std::fs::read_to_string;
 use std::path::Path;
 
-pub struct MarkDown(Html<String>);
+pub struct MarkDown(String);
 
 impl MarkDown {
 	pub fn open<P>(path: P) -> Result<Self>
 	where
 		P: AsRef<OsStr> + AsRef<Path> + Debug,
 	{
-		Ok(Self(Html(Self::md(&read_to_string(path)?)?)))
+		Ok(Self(Self::md(&read_to_string(path)?)?))
 	}
 
 	pub fn md(body: &str) -> Result<String> {
@@ -46,6 +46,6 @@ impl MarkDown {
 
 impl<'r> Responder<'r> for MarkDown {
 	fn respond_to(self, r: &Request) -> response::Result<'r> {
-		self.0.respond_to(r)
+		Html(self.0).respond_to(r)
 	}
 }
