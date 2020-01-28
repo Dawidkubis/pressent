@@ -11,17 +11,14 @@ use std::path::Path;
 pub struct MarkDown(String);
 
 impl MarkDown {
-	pub fn open<P>(path: P) -> Result<Self>
-	where
-		P: AsRef<OsStr> + AsRef<Path> + Debug,
-	{
-		Ok(Self(Self::md(&read_to_string(path)?)?))
+	pub fn new(s: &str) -> Result<Self> {
+		Ok(Self(Self::md(s)?))
 	}
 
-	pub fn md(body: &str) -> Result<String> {
+	pub fn md(s: &str) -> Result<String> {
 		let css: String = MAIN.to_owned();
 
-		let markdown = markdown_to_html(body, &ComrakOptions::default());
+		let markdown = markdown_to_html(s, &ComrakOptions::default());
 
 		Ok(format!(
 				"
