@@ -25,8 +25,20 @@ impl MarkDown {
 
 		Ok(format!(
 				"
-				<!DOCTYPE html>
-				<html><head><style>{}</style></head><body>{}</body</html>
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>{}</style>
+		<section id=\"app\"></section>
+		<script type=\"module\">
+    import init from '/pkg/package.js';
+    init('/pkg/package_bg.wasm');
+		</script>
+	</head>
+	<body>
+	{}
+	</body>
+</html>
 				", css, &markdown
 		))
 	}

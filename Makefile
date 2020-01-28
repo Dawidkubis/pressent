@@ -1,5 +1,7 @@
-build:
+build: src/*
 	cargo build --release
 
-dev:
+dev: src/*
 	cargo build
+
+.PHONY: build dev
