@@ -10,11 +10,6 @@ pub fn index() -> MarkDown {
 	MarkDown::open(&OPT.file).unwrap()
 }
 
-#[get("/<num>")]
-pub fn slide(num: u64) -> MarkDown {
-	MarkDown::open(&OPT.file)
-}
-
 /// any path
 #[get("/<path..>")]
 pub fn path(path: PathBuf) -> Option<NamedFile> {
