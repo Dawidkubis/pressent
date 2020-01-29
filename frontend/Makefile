@@ -6,4 +6,4 @@ dev: src/*
 	cargo build
 	wasm-pack build --target web --dev
 
-.PHONY: all build
+.PHONY: build dev
