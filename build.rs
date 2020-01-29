@@ -1,9 +1,9 @@
 extern crate anyhow;
 
-use std::process::Command;
 use std::env;
+use std::process::Command;
 
-static FRONTEND:&str = "frontend";
+static FRONTEND: &str = "frontend";
 
 fn main() -> anyhow::Result<()> {
 	let p = env::var("PROFILE")?;

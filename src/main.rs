@@ -10,9 +10,9 @@ extern crate comrak;
 extern crate structopt;
 
 mod cli;
+mod request;
 mod response;
 mod routes;
-mod request;
 
 use cli::Cli;
 use std::env;

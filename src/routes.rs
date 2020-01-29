@@ -1,8 +1,7 @@
-use crate::response::MarkDown;
 use crate::request::File;
+use crate::response::MarkDown;
 use rocket::response::{NamedFile, Redirect};
 use rocket::Request;
-use anyhow::Result;
 use std::path::PathBuf;
 
 /// Index
@@ -17,6 +16,7 @@ pub fn index(s: File) -> MarkDown {
 	MarkDown::new(&format!("{}\n{}", prefix.unwrap(), r))
 }
 
+/// Slide by number
 #[get("/<num>")]
 pub fn slide(num: usize, s: File) -> Option<MarkDown> {
 	let mut s = s.divide();
@@ -28,7 +28,7 @@ pub fn slide(num: usize, s: File) -> Option<MarkDown> {
 }
 
 /// any path
-#[get("/<path..>", rank=2)]
+#[get("/<path..>", rank = 2)]
 pub fn path(path: PathBuf) -> Option<NamedFile> {
 	NamedFile::open(path).ok()
 }

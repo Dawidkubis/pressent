@@ -16,7 +16,7 @@ impl MarkDown {
 		let markdown = markdown_to_html(s, &ComrakOptions::default());
 
 		format!(
-				"
+			"
 <!DOCTYPE html>
 <html>
 	<head>
@@ -31,7 +31,8 @@ impl MarkDown {
 	{}
 	</body>
 </html>
-				", css, &markdown
+				",
+			css, &markdown
 		)
 	}
 }
