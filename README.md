@@ -3,6 +3,12 @@
 Create good looking presentations with markdown.
 
 <<>>
+## To_Do
++ smarter slide splitting - should render this correctly; slide names?
++ browser zoom?
++ feedback?
+
+<<>>
 ## Building
 ```shell
 make
