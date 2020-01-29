@@ -9,11 +9,7 @@ use std::path::PathBuf;
 pub fn index(s: File) -> MarkDown {
 	let mut s = s.divide();
 	let prefix = s.next();
-	let r: String = s
-		.enumerate()
-		.map(|(x, _)| format!("\n## [{0}]({0})\n", x + 1))
-		.collect();
-	MarkDown::new(&format!("{}\n{}", prefix.unwrap(), r))
+	MarkDown::new(prefix.unwrap())
 }
 
 /// Slide by number
