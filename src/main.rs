@@ -24,7 +24,8 @@ lazy_static! {
 	pub static ref OPT: Cli = Cli::from_args();
 }
 
-pub static MAIN: &'static str = include_str!("main.css");
+pub static MAIN: &str = include_str!("main.css");
+pub static JS: &str = include_str!("main.js");
 
 fn main() -> Result<()> {
 

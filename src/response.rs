@@ -1,4 +1,4 @@
-use crate::{MAIN, OPT};
+use crate::{MAIN, OPT, JS};
 use comrak::{markdown_to_html, ComrakOptions};
 use rocket::request::Request;
 use rocket::response::{self, content::Html, Responder};
@@ -12,6 +12,7 @@ impl MarkDown {
 
 	fn md(s: &str) -> String {
 		let css: String = MAIN.to_owned();
+		let js: String = JS.to_owned();
 
 		let markdown = markdown_to_html(s, &ComrakOptions::default());
 
@@ -21,11 +22,7 @@ impl MarkDown {
 <html>
 	<head>
 		<style>{}</style>
-		<section id=\"app\"></section>
-		<script type=\"module\">
-    import init from '/pkg/package.js';
-    init('/pkg/package_bg.wasm');
-		</script>
+		<script>{}</script>
 		<title>{}</title>
 	</head>
 	<body>
@@ -33,7 +30,7 @@ impl MarkDown {
 	</body>
 </html>
 				",
-			css, &OPT.file, &markdown
+			css, js, &OPT.file, &markdown
 		)
 	}
 }
