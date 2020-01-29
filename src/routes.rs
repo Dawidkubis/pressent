@@ -11,7 +11,7 @@ pub fn index(s: File) -> MarkDown {
 	let prefix = s.next();
 	let r: String = s
 		.enumerate()
-		.map(|(x, _)| format!("\n## [{0}]({0})\n", x))
+		.map(|(x, _)| format!("\n## [{0}]({0})\n", x + 1))
 		.collect();
 	MarkDown::new(&format!("{}\n{}", prefix.unwrap(), r))
 }
@@ -21,7 +21,12 @@ pub fn index(s: File) -> MarkDown {
 pub fn slide(num: usize, s: File) -> Option<MarkDown> {
 	let mut s = s.divide();
 	s.next();
-	match s.nth(num) {
+	
+	if num == 0 {
+		return None
+	}
+
+	match s.nth(num - 1) {
 		Some(s) => Some(MarkDown::new(s)),
 		None => None,
 	}
