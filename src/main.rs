@@ -16,8 +16,9 @@ mod routes;
 
 use cli::Cli;
 use std::env;
+use std::path::Path;
 use structopt::StructOpt;
-//use anyhow::Result;
+use anyhow::Result;
 
 lazy_static! {
 	pub static ref OPT: Cli = Cli::from_args();
@@ -25,7 +26,13 @@ lazy_static! {
 
 pub static MAIN: &'static str = include_str!("main.css");
 
-fn main() {
+fn main() -> Result<()> {
+
+	// check if file exists
+	if !Path::new(&OPT.file).exists() {
+		panic!("file not found: {}", OPT.file);
+	}
+
 	// port setting
 	if let Some(i) = OPT.port {
 		env::set_var("ROCKET_PORT", format!("{}", i));
@@ -36,4 +43,6 @@ fn main() {
 		.mount("/", routes![routes::index, routes::path, routes::slide])
 		.register(catchers![routes::not_found,])
 		.launch();
+
+	Ok(())
 }

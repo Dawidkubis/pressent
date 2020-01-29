@@ -1,4 +1,4 @@
-use crate::MAIN;
+use crate::{MAIN, OPT};
 use comrak::{markdown_to_html, ComrakOptions};
 use rocket::request::Request;
 use rocket::response::{self, content::Html, Responder};
@@ -26,13 +26,14 @@ impl MarkDown {
     import init from '/pkg/package.js';
     init('/pkg/package_bg.wasm');
 		</script>
+		<title>{}</title>
 	</head>
 	<body>
 	{}
 	</body>
 </html>
 				",
-			css, &markdown
+			css, &OPT.file, &markdown
 		)
 	}
 }
