@@ -33,7 +33,7 @@ fn main() {
 
 	// rocket server init
 	rocket::ignite()
-		.mount("/", routes![routes::index, routes::path])
+		.mount("/", routes![routes::index, routes::path, routes::slide])
 		.register(catchers![routes::not_found,])
 		.launch();
 }
