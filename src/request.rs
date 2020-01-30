@@ -9,7 +9,7 @@ pub struct File(String);
 
 impl File {
 	pub fn divide(&self) -> impl Iterator<Item = &str> {
-		self.0.split("<<>>")
+		self.0.split("\n<<>>\n")
 	}
 }
 
