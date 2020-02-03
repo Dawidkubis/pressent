@@ -1,3 +1,8 @@
+//! Pressent - serve your markdown files as presentations.
+//!
+//! use `<<>>` to separate slides
+//! use the arrow keys to move around
+
 #![feature(proc_macro_hygiene, decl_macro)]
 
 #[macro_use]
