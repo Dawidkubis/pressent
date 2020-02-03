@@ -1,6 +1,6 @@
 [package]
 name = "pressent"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Dawid J. Kubis <dawid.kubis3@gmail.com>"]
 edition = "2018"
 license = "MIT"
