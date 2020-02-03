@@ -5,7 +5,7 @@ authors = ["Dawid J. Kubis <dawid.kubis3@gmail.com>"]
 edition = "2018"
 license = "MIT"
 repository = "https://github.com/Dawidkubis/pressent/"
-description = "serving markdown files as presentations"
+description = "[serving markdown files as presentations](https://github.com/Dawidkubis/pressent/)"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
