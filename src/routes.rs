@@ -17,9 +17,9 @@ pub fn index(s: File) -> MarkDown {
 pub fn slide(num: usize, s: File) -> Option<MarkDown> {
 	let mut s = s.divide();
 	s.next();
-	
+
 	if num == 0 {
-		return None
+		return None;
 	}
 
 	match s.nth(num - 1) {

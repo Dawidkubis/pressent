@@ -5,6 +5,7 @@ use rocket::request::{self, FromRequest, Request};
 use rocket::Outcome;
 use std::fs::read_to_string;
 
+/// a request guard for the input file
 pub struct File(String);
 
 impl File {

@@ -14,11 +14,11 @@ mod request;
 mod response;
 mod routes;
 
+use anyhow::Result;
 use cli::Cli;
 use std::env;
 use std::path::Path;
 use structopt::StructOpt;
-use anyhow::Result;
 
 lazy_static! {
 	pub static ref OPT: Cli = Cli::from_args();
@@ -28,7 +28,6 @@ pub static MAIN: &str = include_str!("main.css");
 pub static JS: &str = include_str!("main.js");
 
 fn main() -> Result<()> {
-
 	// check if file exists
 	if !Path::new(&OPT.file).exists() {
 		panic!("file not found: {}", OPT.file);

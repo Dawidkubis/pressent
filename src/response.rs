@@ -1,10 +1,11 @@
-use crate::{MAIN, OPT, JS};
+use crate::{JS, MAIN, OPT};
 use comrak::{markdown_to_html, ComrakOptions};
 use rocket::request::Request;
 use rocket::response::{self, content::Html, Responder};
 
 pub struct MarkDown(String);
 
+/// markdown server-side compilation
 impl MarkDown {
 	pub fn new(s: &str) -> Self {
 		Self(Self::md(s))
