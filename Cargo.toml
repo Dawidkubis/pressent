@@ -3,7 +3,7 @@ name = "pressent"
 version = "1.0.0"
 authors = ["Dawid J. Kubis <dawid.kubis3@gmail.com>"]
 edition = "2018"
-license = "mit"
+license = "MIT"
 repository = "https://github.com/Dawidkubis/pressent/"
 description = "serving markdown files as presentations"
 
