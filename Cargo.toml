@@ -3,6 +3,8 @@ name = "pressent"
 version = "1.0.0"
 authors = ["Dawid J. Kubis <dawid.kubis3@gmail.com>"]
 edition = "2018"
+license = "mit"
+description = "serving markdown files as presentations"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
