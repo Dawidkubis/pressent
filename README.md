@@ -3,7 +3,13 @@
 Create good looking presentations with markdown.
 
 <<>>
-## Building
+## Installation
+```
+cargo install pressent
+```
+
+<<>>
+## Building from source
 ```shell
 make
 ```
